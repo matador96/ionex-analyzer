@@ -56,7 +56,7 @@ this.OnclickButton = this.OnclickButton.bind(this);
         <Button id="openButton" onClick={this.OnclickButton}>sАнализ файла</Button>
 
       <input type="file" name="file" id="exampleFile" />
-          <b> Release 0.0.1 </b>
+          <b> Releasea 0.0.1 </b>
           Version: {app.getVersion()}
         </p>
       </div>
