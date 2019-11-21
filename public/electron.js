@@ -1,12 +1,6 @@
 const electron = require("electron");
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
-/*
-const appremote  = require('electron').remote;
-let dialog = appremote.dialog;
-let fs = require('fs');*/
-
-
 
 const path = require("path");
 const isDev = require("electron-is-dev");
@@ -16,9 +10,10 @@ const isDev = require("electron-is-dev");
 let mainWindow;
 
 require("update-electron-app")({
- // repo: "kitze/react-electron-example",
+ repo: "kitze/react-electron-example",
   updateInterval: "1 hour"
 });
+
 
 function createWindow() {
   mainWindow = new BrowserWindow({ width: 900, height: 680, webPreferences: { nodeIntegration: true }});
@@ -43,13 +38,3 @@ app.on("activate", () => {
     createWindow();
   }
 });
-
-
-
-
-
-/*
-dialog.showOpenDialog((fileNames) => {
-
-
-});*/
