@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import { Button, Spinner, Input } from "react-bootstrap";
-//import { readFile } from "fs";
+import { Button, Spinner, Form } from "react-bootstrap";
+//import { readFile } from "fs";  //Spinner  Input
 //import { tsLiteralType } from "@babel/types";
-
-//const { app } = window.require("electron").remote;
+import Help from "./components/Help";
+import Menu from "./components/Menu";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: ""
+      fetching: false
     };
 
     this.OnclickButton = this.OnclickButton.bind(this);
@@ -19,30 +19,69 @@ class App extends Component {
 
   OnclickButton(e) {
     e.preventDefault();
-    window.fileOpen();
+    window.Openfile();
+
+    this.setState({
+      // fetching: false
+    });
   }
 
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>
-            React1 + Electron ={" "}
-            <span role="img" aria-label="love">
-              😍
-            </span>
-          </h2>
-        </div>
-
-        <p className="App-intro">
+        {this.state.fetching ? (
           <Spinner animation="border" />
-          <Button id="openButton" onClick={this.OnclickButton}>
-            Выбрать файл
-          </Button>
+        ) : (
+          <>
+            <div className="App-header">
+              <img src={logo} className="App-logo" alt="logo" />
+              <h2>React + Electron</h2>
+            </div>
 
-          <b> Releasea 0.0.1 </b>
-        </p>
+            <p className="App-intro">
+              <Button
+                variant="outline-dark"
+                id="openButton"
+                onClick={this.OnclickButton}
+              >
+                Выбрать файл IONEX
+              </Button>
+
+              <div
+                id="version"
+                style={{
+                  position: "fixed",
+                  right: 10,
+                  bottom: 10,
+                  fontSize: 13
+                }}
+              >
+                {" "}
+                Version 0.0.1{" "}
+              </div>
+
+              <div
+                id="datafile"
+                style={{
+                  position: "fixed",
+                  left: 10,
+                  bottom: 10,
+                  fontSize: 13
+                }}
+              ></div>
+            </p>
+
+            <Help />
+
+            <Menu />
+            <Form.Control
+              style={{ display: "none" }}
+              as="textarea"
+              id="textarea"
+              rows="20"
+            />
+          </>
+        )}
       </div>
     );
   }

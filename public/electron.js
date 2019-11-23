@@ -6,7 +6,6 @@ const path = require("path");
 const isDev = require("electron-is-dev");
 
 
-
 let mainWindow;
 
 require("update-electron-app")({
@@ -16,7 +15,8 @@ require("update-electron-app")({
 
 
 function createWindow() {
-  mainWindow = new BrowserWindow({ width: 900, height: 680, webPreferences: { nodeIntegration: true }});
+  mainWindow = new BrowserWindow({ width: 900, height: 680, 
+    webPreferences: { nodeIntegration: true, webSecurity: false }});
   mainWindow.loadURL(
     isDev
       ? "http://localhost:3000"
