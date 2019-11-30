@@ -7,32 +7,61 @@
 
   width: 300px;
   margin: auto;
-  padding-top: 20%;
-
+    padding-top: 18%;
 
   transition-timing-function: easy;
   transition-duration: 2s;
 }
 
-.process-file .App{
+.process-file .App {
   padding-top: 0%;
 }
 
-#root{
-  
-  background: rgb(34,193,195);
-  background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(45,185,253,1) 100%);
-  height:100vh;
- 
+#root {
+  background-color: rgb(34, 193, 195);
+  /* background: linear-gradient(
+    0deg,
+    rgba(34, 193, 195, 1) 0%,
+    rgba(45, 185, 253, 1) 100%
+  );*/
+  /*  background: url("https://htmlcolorcodes.com/assets/images/html-color-codes-color-tutorials-hero-00e10b1f.jpg"); */
+  /*background: url("fon.jpg");*/
+
+  background-size: cover;
+  background-position: left top;
+  height: 100vh;
+  width:100%;
+
+background-size:cover;
+
 }
+
+
+
+#root{
+	background-image:  url("fon_world.jpg");
+	animation: animatedBackground 6360s linear infinite;
+	-webkit-animation: animatedBackground 6360s linear infinite;
+}
+
+@keyframes animatedBackground {
+  0 {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -50800px 0px; /* анимируем свойство background-position */
+  }
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+  height: 60px;
+  margin-bottom: 15px;
+  -webkit-animation: App-logo-spin infinite 20s linear;
 }
 
 .App-header {
-
-  height: 150px;
+  height: 70px;
   padding: 20px;
   color: #353535;
 }
@@ -41,8 +70,25 @@
   font-size: large;
 }
 
+#mapbasic{
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  opacity: 0;
+  transition: 0.3s all;
+  z-index: -1;
+  -webkit-transition: 0.3s all;
+  -moz-transition: 0.3s all;
+  -ms-transition: 0.3s all;
+  -o-transition: 0.3s all;
+}
+
+
+.process-file #mapbasic{
+  opacity: 1;
+}
 /* Дата кнопка */
-#datafile{
+#datafile {
   opacity: 0;
   transition: 0.3s all;
   -webkit-transition: 0.3s all;
@@ -51,34 +97,59 @@
   -o-transition: 0.3s all;
 }
 
+.timeclass{
+  font-size: 25px;
+  font-weight: 700;
+}
+.my-button{
+  display: flex;
+  justify-content: space-between;
+}
 /* Процесс открытие файла */
-.process-file #menu-electron{
+.process-file #menu-electron {
   opacity: 1;
 }
 
-.process-file #datafile{
+
+.App {
+  margin-top: 0vh !important;
+  transition: 2.3s all;
+  -webkit-transition: 2.3s all;
+  -moz-transition: 2.3s all;
+  -ms-transition: 2.3s all;
+  -o-transition: 2.3s all;
+  z-index: 9;
+}
+
+.process-file .App {
+  margin-top: -100vh !important;
+}
+
+.process-file #datafile {
   opacity: 1 !important;
 }
 
-
-
-.process-file #openButton{
-display:none;
+.process-file #openButton {
+  display: none;
 }
 
-.process-file .list-counter-square{
-  opacity:0;
+.process-file .list-counter-square {
+  opacity: 0;
 }
 
+.h2-main{
+  color: #fff;
+  text-transform: uppercase;
+}
 /* UL LI */
-#menu-electron{
+#menu-electron {
   position: absolute;
   left: 15px;
   top: 15px;
   opacity: 0;
-  transition:0.3s all;
+  transition: 0.3s all;
+  z-index: 7;
 }
-
 
 .list-counter-square {
   list-style: none;
@@ -89,26 +160,25 @@ display:none;
   opacity: 1;
   transition-timing-function: easy;
   transition-duration: 1s;
-
 }
-.list-counter-square>li {
+.list-counter-square > li {
   position: relative;
   display: block;
   height: 2rem;
   line-height: 2rem;
   margin-left: 2rem;
-  margin-bottom: .25rem;
-  padding-left: .5rem;
-  padding-right: .5rem;
+  margin-bottom: 0.25rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
   color: #fff;
-  background: #0000005c;
+  background: #353535bf;
   white-space: nowrap;
   text-align: left;
 }
-.list-counter-square>li:last-child {
+.list-counter-square > li:last-child {
   margin-bottom: 0;
 }
-.list-counter-square>li::before {
+.list-counter-square > li::before {
   content: counter(list);
   counter-increment: list;
   position: absolute;
@@ -118,13 +188,17 @@ display:none;
   width: 2rem;
   line-height: 2rem;
   text-align: center;
-  color: #fff;
-  background: rgba(0, 0, 0, 0.59);
+  color: #000000ab;
+  background: #ffbc00b8;
+  background-color: #e0a800;
+  border-color: #d39e00;
 }
 
-
-
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

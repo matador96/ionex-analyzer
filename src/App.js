@@ -6,83 +6,140 @@ import { Button, Spinner, Form } from "react-bootstrap";
 //import { tsLiteralType } from "@babel/types";
 import Help from "./components/Help";
 import Menu from "./components/Menu";
+import BasicMap from "./BasicMap";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      fetching: false
+      fetching: false,
+      earth: false,
+      count: 0
     };
 
     this.OnclickButton = this.OnclickButton.bind(this);
+    this.ButtonBack = this.ButtonBack.bind(this);
+		this.ButtonNext = this.ButtonNext.bind(this);
   }
 
   OnclickButton(e) {
     e.preventDefault();
     window.Openfile();
-
-    this.setState({
-      // fetching: false
-    });
+  }
+  componentWillMount() {
+    localStorage.clear();
+  }
+  componentDidMount() {
+    if (!this.state.earth) {
+      let timerID = setInterval(() => {
+        if (localStorage.length > 0) {
+          clearInterval(timerID);
+          this.setState({
+            earth: true
+          });
+          document.body.style.background='#20ccff';
+        }
+      }, 1000);
+    }
   }
 
+  ButtonNext() {
+		if (this.state.count !== 24) {
+			this.setState({
+        count: this.state.count + 1,
+        disabled:true
+			});
+    }
+    
+    setTimeout(() => this.setState({ disabled: false }), 2000);
+  }
+  
+
+  ButtonBack() {
+		if (this.state.count !== 0) {
+			this.setState({
+        count: this.state.count - 1,
+        disabled:true
+			});
+    }
+    setTimeout(() => this.setState({ disabled: false }), 2000);
+
+  }
+  
+
   render() {
+    //  <img src={logo} className="App-logo" alt="logo" />
     return (
-      <div className="App">
-        {this.state.fetching ? (
-          <Spinner animation="border" />
-        ) : (
-          <>
-            <div className="App-header">
-              <img src={logo} className="App-logo" alt="logo" />
-              <h2>React + Electron</h2>
-            </div>
-
-            <p className="App-intro">
-              <Button
-                variant="outline-dark"
-                id="openButton"
-                onClick={this.OnclickButton}
-              >
-                Выбрать файл IONEX
-              </Button>
-
-              <div
-                id="version"
-                style={{
-                  position: "fixed",
-                  right: 10,
-                  bottom: 10,
-                  fontSize: 13
-                }}
-              >
-                {" "}
-                Version 0.0.1{" "}
+      <>
+        <div className="App">
+          {this.state.fetching ? (
+            <Spinner animation="border" />
+          ) : (
+            <>
+              <div className="App-header">
+                <h2 class="h2-main">IONEX Viewer</h2>
               </div>
 
-              <div
-                id="datafile"
-                style={{
-                  position: "fixed",
-                  left: 10,
-                  bottom: 10,
-                  fontSize: 13
-                }}
-              ></div>
-            </p>
+              <p className="App-intro">
+                <Button
+                  variant="warning"
+                  id="openButton"
+                  onClick={this.OnclickButton}
+                >
+                  Выбрать файл IONEX
+                </Button>
 
-            <Help />
+                <div
+                  id="version"
+                  style={{
+                    position: "fixed",
+                    right: 10,
+                    bottom: 5,
+                    fontSize: 13
+                  }}
+                >
+                  {" "}
+                  Version 0.0.1{" "}
+                </div>
 
-            <Menu />
-            <Form.Control
-              style={{ display: "none" }}
-              as="textarea"
-              id="textarea"
-              rows="20"
-            />
-          </>
+                <div
+                  id="datafile"
+                  style={{
+                    position: "fixed",
+                    left: 10,
+                    bottom: 5,
+                    fontSize: 13
+                  }}
+                ></div>
+              </p>
+
+              <Help />
+
+              <Menu />
+              <Form.Control
+                style={{ display: "none" }}
+                as="textarea"
+                id="textarea"
+                rows="20"
+              />
+            </>
+          )}
+        </div>
+        {this.state.earth && (
+          <div id="mapbasic">
+            <BasicMap data={JSON.parse(localStorage.getItem("massive"))[this.state.count]} />
+            <div className="my-button">
+					<Button variant="dark" onClick={this.ButtonBack}>
+						Пред. час
+					</Button>
+					<div className="timeclass">Время: {this.state.count}:00</div>
+					<Button variant="dark" onClick={this.ButtonNext}>
+						След. час
+					</Button>
+				</div>
+          </div>
         )}
-      </div>
+      </>
     );
   }
 }
