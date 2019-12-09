@@ -14,17 +14,18 @@ class App extends Component {
     this.state = {
       fetching: false,
       earth: false,
-      count: 0
+      count: 0,
+      int: 0
     };
-
+    this.handleChange = this.handleChange.bind(this);
     this.OnclickButton = this.OnclickButton.bind(this);
     this.ButtonBack = this.ButtonBack.bind(this);
-		this.ButtonNext = this.ButtonNext.bind(this);
+    this.ButtonNext = this.ButtonNext.bind(this);
   }
 
   OnclickButton(e) {
     e.preventDefault();
-    window.Openfile();
+    window.Openfile(this.state.int);
   }
   componentWillMount() {
     localStorage.clear();
@@ -37,37 +38,43 @@ class App extends Component {
           this.setState({
             earth: true
           });
-          document.body.style.background='#20ccff';
+          document.body.style.background = "#20ccff";
         }
       }, 1000);
     }
   }
 
+  handleChange(event) {
+    const value = event.target.value;
+ 
+    this.setState({
+      int: value
+    });
+  }
+
   ButtonNext() {
-		if (this.state.count !== 24) {
-			this.setState({
+    if (this.state.count !== 24) {
+      this.setState({
         count: this.state.count + 1,
-        disabled:true
-			});
+        disabled: true
+      });
     }
-    
+
     setTimeout(() => this.setState({ disabled: false }), 2000);
   }
-  
 
   ButtonBack() {
-		if (this.state.count !== 0) {
-			this.setState({
+    if (this.state.count !== 0) {
+      this.setState({
         count: this.state.count - 1,
-        disabled:true
-			});
+        disabled: true
+      });
     }
     setTimeout(() => this.setState({ disabled: false }), 2000);
-
   }
-  
 
   render() {
+  
     //  <img src={logo} className="App-logo" alt="logo" />
     return (
       <>
@@ -81,6 +88,21 @@ class App extends Component {
               </div>
 
               <p className="App-intro">
+                <Form.Control
+                  as="select"
+                  style={{ marginBottom: "15px" }}
+                  value={this.state.int}
+                  onChange={this.handleChange}
+                >
+                  <option selected value="0">
+                    Все точки ПЭС
+                  </option>
+                  <option value="100">Больше 100 </option>
+                  <option value="200">Больше 200</option>
+                  <option value="300">Больше 300</option>
+                  <option value="400">Больше 400</option>
+                </Form.Control>
+
                 <Button
                   variant="warning"
                   id="openButton"
@@ -127,16 +149,20 @@ class App extends Component {
         </div>
         {this.state.earth && (
           <div id="mapbasic">
-            <BasicMap data={JSON.parse(localStorage.getItem("massive"))[this.state.count]} />
+            <BasicMap
+              data={
+                JSON.parse(localStorage.getItem("massive"))[this.state.count]
+              }
+            />
             <div className="my-button">
-					<Button variant="dark" onClick={this.ButtonBack}>
-						Пред. час
-					</Button>
-					<div className="timeclass">Время: {this.state.count}:00</div>
-					<Button variant="dark" onClick={this.ButtonNext}>
-						След. час
-					</Button>
-				</div>
+              <Button variant="dark" onClick={this.ButtonBack}>
+                Пред. час
+              </Button>
+              <div className="timeclass">Время: {this.state.count}:00</div>
+              <Button variant="dark" onClick={this.ButtonNext}>
+                След. час
+              </Button>
+            </div>
           </div>
         )}
       </>

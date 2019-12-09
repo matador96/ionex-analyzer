@@ -5,7 +5,7 @@ const fs = require("fs");
 
 // Access some stored data
 
-function Openfile() {
+function Openfile(int) {
   dialog
     .showOpenDialog({ properties: ["openFile"] })
     .then(result => {
@@ -13,6 +13,7 @@ function Openfile() {
       //  console.log(result.filePaths)
 
       // Открытие файла
+     
       if (result.filePaths[0] !== undefined) {
         if (result.filePaths[0].match(/.18i/)) {
           fs.readFile(result.filePaths[0], "utf-8", (err, data) => {
@@ -97,8 +98,8 @@ function Openfile() {
                       //* element - это значение TEC
                       //* Создание каждого объекта (массива)
                       //  var elem_arr = []; //* Обявление массива
-
-                      massivehour.push(
+                      if(parseInt(int)<parseInt(element)){                    
+                      massivehour.push(                   
                         new (function() {
                           this.name = element_bumber;
                           this.coordinates = [
@@ -107,8 +108,9 @@ function Openfile() {
                           ];
                           this.score = element*18000;
                         })()
-                      );
 
+                      );
+                    }
                       /*
                     elem_arr.coordinates = []; //* Обявление массива координат в объекте
                     elem_arr.name = "myatat"; //* Добавляем название для точки в нашем случае номер объекта
