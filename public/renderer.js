@@ -5,7 +5,15 @@ const fs = require("fs");
 
 // Access some stored data
 
-function Openfile(int) {
+function Openfile(
+  int,
+  shirota_first,
+  shirota_second,
+  dolgota_first,
+  dolgota_second,
+  time_first,
+  time_second
+) {
   dialog
     .showOpenDialog({ properties: ["openFile"] })
     .then(result => {
@@ -13,9 +21,9 @@ function Openfile(int) {
       //  console.log(result.filePaths)
 
       // Открытие файла
-     
+
       if (result.filePaths[0] !== undefined) {
-        if (result.filePaths[0].match(/.18i/)) {
+        if (result.filePaths[0].match(/.*i/)) {
           fs.readFile(result.filePaths[0], "utf-8", (err, data) => {
             if (err) {
               dialog.showMessageBox({
@@ -36,6 +44,11 @@ function Openfile(int) {
             let element_bumber = 0;
             let massive = []; //* Общий массив элементов
             let massivehour = []; //* По часовый массив
+            let hourscount = 0;
+
+            let house = 0;
+            //  let masselements = []; //* Элементы
+
             arr.forEach(function(line, i) {
               counter++;
 
@@ -59,6 +72,7 @@ function Openfile(int) {
                   var datafile = new Date(
                     Date.parse(myau[0].trim())
                   ).toLocaleString("ru", options);
+
                   var body = document.getElementById("root");
                   body.classList.add("process-file");
                   document.getElementById("datafile").innerHTML = datafile;
@@ -78,6 +92,29 @@ function Openfile(int) {
                     //* Это необходимо использовать ибо в Javascript нельзя выйти из foreach (every, some не хочу использовать как и try catch)
                   }
                 }
+                /* 
+                if (line.match(/EPOCH OF CURRENT MAP/)){
+              
+
+              if(counthours===2){
+                    if(line.match(/1     0/)){
+           
+                      house = 1;
+                    }else{
+            
+                      house = 2;
+                    }                    
+                  }   
+
+
+            //      hourscount = counthours + house; // !ЭТО МОЖЕТ ЗАРЕШАТЬ
+         
+                  counthours++;            
+
+                }
+
+        */
+
                 if (line.match(/180.0   5.0 450.0/) && ostanovka) {
                   //counter+5
                   //* Достаем широту из каждого блока
@@ -91,26 +128,60 @@ function Openfile(int) {
                     var re = /[\s,]+/; //* Получаем массив значений TEC в одной строке путем деление строки регулярным выражением
                     var linesplit = lineint.trim().split(re); //* Массив значений по долготе в одной широте
 
-                  
                     linesplit.forEach(function(element) {
                       element_bumber++;
 
                       //* element - это значение TEC
                       //* Создание каждого объекта (массива)
                       //  var elem_arr = []; //* Обявление массива
-                      if(parseInt(int)<parseInt(element)){                    
-                      massivehour.push(                   
-                        new (function() {
-                          this.name = element_bumber;
-                          this.coordinates = [
-                            parseInt(dolgota),
-                            parseFloat(shirota)
-                          ];
-                          this.score = element*18000;
-                        })()
+                      if (parseInt(int) < parseInt(element)) {
+                        if (
+                          shirota_first === undefined ||
+                          shirota_second === undefined ||
+                          dolgota_first === undefined ||
+                          dolgota_second === undefined
+                        ) {
+                          massivehour.push(
+                            new (function() {
+                              this.name = element_bumber;
 
-                      );
-                    }
+                              this.coordinates = [
+                                parseInt(dolgota),
+                                parseFloat(shirota)
+                              ];
+
+                              this.score = element * 18000;
+
+                              masselements.push(parseInt(element));
+                            })()
+                          );
+                        } else {
+                          if (
+                            parseFloat(shirota_first) <= shirota &&
+                            parseFloat(shirota_second) >= shirota
+                          ) {
+                            if (
+                              parseInt(dolgota_first) <= dolgota &&
+                              parseInt(dolgota_second) >= dolgota
+                            ) {
+                              massivehour.push(
+                                new (function() {
+                                  this.name = element_bumber;
+
+                                  this.coordinates = [
+                                    parseInt(dolgota),
+                                    parseFloat(shirota)
+                                  ];
+
+                                  this.score = element * 18000;
+
+                                  //  masselements.push(parseInt(element));
+                                })()
+                              );
+                            }
+                          }
+                        }
+                      }
                       /*
                     elem_arr.coordinates = []; //* Обявление массива координат в объекте
                     elem_arr.name = "myatat"; //* Добавляем название для точки в нашем случае номер объекта
@@ -134,6 +205,15 @@ function Openfile(int) {
             localStorage.clear();
             try {
               localStorage.setItem("massive", JSON.stringify(massive));
+              localStorage.setItem("length", massive.length);
+
+              /*
+              let sum = masselements.reduce((a, b) => a + b, 0);
+              let result = sum / masselements.length;
+              console.log(datafile);
+
+              console.log(result);
+              */
             } catch (e) {
               if (e == QUOTA_EXCEEDED_ERR) {
                 dialog.showMessageBox({
@@ -146,9 +226,7 @@ function Openfile(int) {
                 });
               }
             }
-        //    console.log(JSON.parse(localStorage.getItem("massive")));
-
-
+            //    console.log(JSON.parse(localStorage.getItem("massive")));
           });
         } else {
           dialog.showMessageBox({

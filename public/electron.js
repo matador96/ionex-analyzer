@@ -5,23 +5,27 @@ const BrowserWindow = electron.BrowserWindow;
 const path = require("path");
 const isDev = require("electron-is-dev");
 
-
 let mainWindow;
 
 require("update-electron-app")({
- repo: "kitze/react-electron-example",
+  repo: "kitze/react-electron-example",
   updateInterval: "1 hour"
 });
 
-
 function createWindow() {
-  mainWindow = new BrowserWindow({ width: 900, height: 680, 
-    webPreferences: { nodeIntegration: true, webSecurity: false }});
+  mainWindow = new BrowserWindow({
+    width: 900,
+    height: 680,
+   // autoHideMenuBar: true,
+
+    webPreferences: { nodeIntegration: true, webSecurity: false }
+  });
   mainWindow.loadURL(
     isDev
       ? "http://localhost:3000"
       : `file://${path.join(__dirname, "../build/index.html")}`
   );
+ // mainWindow.setMenu(null); // Скрыть меню
   mainWindow.on("closed", () => (mainWindow = null));
 }
 
