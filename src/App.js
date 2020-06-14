@@ -21,10 +21,10 @@ class App extends Component {
       count: 0,
       int: 0,
       more: false,
-      dolgota_second: "100",
-      dolgota_first: "-100",
-      shirota_second: "1.0",
-      shirota_first: "-1.0",
+      dolgota_second: "180",
+      dolgota_first: "-180",
+      shirota_second: "90.0",
+      shirota_first: "-90.0",
       hourscount: -1
     };
     this.handleChange = this.handleChange.bind(this);
@@ -139,6 +139,7 @@ class App extends Component {
               </div>
 
               <p className="App-intro">
+                {/* 
                 <Form.Control
                   as="select"
                   style={{ marginBottom: "15px" }}
@@ -152,7 +153,8 @@ class App extends Component {
                   <option value="200">Больше 200</option>
                   <option value="300">Больше 300</option>
                   <option value="400">Больше 400</option>
-                </Form.Control>
+                </Form.Control> */}
+                {/*
                 <FormGroup className="flex-bruh">
                   <h2 class="h2-new">Больше настроек</h2>
                   <label class="switch">
@@ -160,7 +162,7 @@ class App extends Component {
                     <span class="slider round"></span>
                   </label>
                 </FormGroup>
-
+ */}
                 {this.state.more && (
                   <div>
                     <Row className="flex-bruh-middle">
@@ -352,7 +354,7 @@ class App extends Component {
                   <table className="table table-bordered">
                     <thead>
                       <tr>
-                        <th>Часы</th>
+                        <th>Время</th>
                         <th>Широта</th>
                         <th>Долгота</th>
                         <th>TEC</th>
@@ -363,7 +365,7 @@ class App extends Component {
                         this.state.hourscount
                       ].map((arr, i) => (
                         <tr>
-                          <td>{arr.hour}</td>
+                          <td>04:00</td>
 
                           <td>{arr.coordinates[1]}</td>
                           <td>{arr.coordinates[0]}</td>
@@ -379,7 +381,6 @@ class App extends Component {
                 <Map3D />
               </TabPanel>
               <TabPanel>
-                params
                 <Col md={6}>
                   <Row className="flex-bruh-middle">
                     <Col md={3}>
@@ -440,6 +441,39 @@ class App extends Component {
                           onChange={this.handleChangeInputs}
                         />
                       </FormGroup>
+                    </Col>
+                  </Row>
+                  <Row className="flex-bruh-middle">
+                    <Col md={3}>
+                      <h2 className="h2-new">Точки ПЭС</h2>
+                    </Col>
+                    <Col md={6}>
+                      <Form.Control
+                        as="select"
+                        style={{ marginBottom: "15px" }}
+                        value={this.state.int}
+                        onChange={this.handleChange}
+                      >
+                        <option selected value="0">
+                          Все точки ПЭС
+                        </option>
+                        <option value="100">Больше 100 </option>
+                        <option value="200">Больше 200</option>
+                        <option value="300">Больше 300</option>
+                        <option value="400">Больше 400</option>
+                      </Form.Control>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col md={6}>
+                      <Button
+                        variant="success"
+                        id="openButton"
+                        style={{ display: "block" }}
+                        onClick={this.OnclickButton}
+                      >
+                        Сохранить
+                      </Button>
                     </Col>
                   </Row>
                 </Col>
