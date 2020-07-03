@@ -1,6 +1,6 @@
 {
-  "name": "cra-electron",
-  "description": "IONEX",
+  "name": "ionexviewer",
+  "description": "IONEX Viewer by Altun Ismailov",
   "author": "matador",
   "version": "0.2.7",
   "private": true,
@@ -48,6 +48,7 @@
     "electron-build": "electron-builder",
     "release": "yarn react-build && electron-builder --publish=always",
     "build": "yarn react-build && yarn electron-build",
+    "build32": "yarn react-build && yarn electron-build --ia32",
     "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron .\""
   },
   "browserslist": {

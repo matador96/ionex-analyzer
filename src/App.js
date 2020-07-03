@@ -718,6 +718,8 @@ class App extends Component {
                   https://github.com/matador96/ionex-analyzer &nbsp; &nbsp;
                   <br />
                   Разработчик: atubrah@mail.ru
+                  <br />
+                  Для перезапуска приложения: CTRL + R
                 </div>
               </TabPanel>
             </Tabs>
