@@ -1,121 +1,9 @@
 const { dialog } = window.require("electron").remote;
 const fs = require("fs");
 
+//const filepath = "C:/Users/centi/Desktop/отчет.txt"; // you need to save the filepath when you open the file to update without use the filechooser dialog againg
 
-function MinimalPes() {
-  var jsn = JSON.parse(localStorage.getItem("massive"));
-  let massiveminimalpesfiltred = [];
-
-  for (var i = 0; i < jsn.length; i++) {
-    var daunmassive = [];
-    jsn[i].forEach((arr) => {
-      var pesik = Math.round(parseInt(arr.score) / 18000);
-
-      if (90 <= parseInt(pesik)) {
-        daunmassive.push(arr);
-      } else {
-        return;
-      }
-    });
-
-    massiveminimalpesfiltred[i] = daunmassive;
-  }
-
-  localStorage.setItem(
-    "massiveminimalpesfiltred",
-    JSON.stringify(massiveminimalpesfiltred)
-  );
-}
-function SaveFile(dolgotamax, dolgotamin, shirotamax, shirotamin, pesmin) {
-  var jsn = JSON.parse(localStorage.getItem("massive"));
-  //  let massivefiltred = [];
-
-  var data = "";
-  data =
-    data +
-    "time" +
-    "\t" +
-    "longitude" +
-    "\t" +
-    "latitude" +
-    "\t" +
-    "TECU" +
-    "\n";
-
-  for (var i = 0; i < jsn.length; i++) {
-    if (jsn.length == "13") {
-      if (i == 0) {
-        time = "00" + ":00";
-      } else if (i * 2 == 24) {
-        time = "00:00";
-      } else {
-        time = i * 2 + ":00";
-      }
-    } else {
-      if (i == 0) {
-        time = "00" + ":00";
-      } else if (i == 24) {
-        time = "00:00";
-      } else {
-        time = i + ":00";
-      }
-    }
-
-    jsn[i].forEach((arr, i) => {
-      var pesik = Math.round(parseInt(arr.score) / 18000);
-
-      if (
-        parseInt(dolgotamin) <= parseInt(arr.coordinates[0]) &&
-        parseInt(dolgotamax) >= parseInt(arr.coordinates[0]) &&
-        parseFloat(shirotamin) <= parseFloat(arr.coordinates[1]) &&
-        parseFloat(shirotamax) >= parseFloat(arr.coordinates[1]) &&
-        parseInt(pesmin) <= parseInt(pesik)
-      ) {
-        // arr.coordinates[0] долгота
-        data =
-          data +
-          time +
-          "\t" +
-          arr.coordinates[0] +
-          "\t" +
-          arr.coordinates[1] +
-          "\t" +
-          pesik +
-          "\n";
-
-        //   massivefiltred.push(arr);
-      } else {
-        return;
-      }
-    });
-  }
-
-  // localStorage.setItem("massivefiltred", JSON.stringify(massivefiltred));
-
-  const savePath = dialog.showSaveDialogSync({
-    filters: [
-      {
-        name: "Microsoft Excel",
-        extensions: ["xls"],
-      },
-    ],
-  });
-
-  fs.writeFile(savePath, data, function(err) {
-    if (err) throw err;
-    var file = "Файл сохранен.";
-    document.getElementById("filesozdan").innerHTML = file;
-  });
-
-  /* OLD DELETE
-  fs.appendFile(filename + ".xls", data, (err) => {
-    if (err) throw err;
-    console.log("Файл создан");
-
-    var file = "Файл с названием " + filename + ".xls" + " создан.";
-    document.getElementById("filesozdan").innerHTML = file;
-  });*/
-}
+// Access some stored data
 
 function Openfile(
   int,
@@ -128,7 +16,7 @@ function Openfile(
 ) {
   dialog
     .showOpenDialog({ properties: ["openFile"] })
-    .then((result) => {
+    .then(result => {
       //  console.log(result.canceled)
       //  console.log(result.filePaths)
 
@@ -143,7 +31,7 @@ function Openfile(
                 buttons: ["Окей"],
                 defaultId: 2,
                 title: "Что то не так",
-                message: "Ошибка: " + err.message,
+                message: "Ошибка: " + err.message
               });
               return;
             }
@@ -178,7 +66,7 @@ function Openfile(
                     timezone: "UTC",
                     hour: "numeric",
                     minute: "numeric",
-                    second: "numeric",
+                    second: "numeric"
                   };
 
                   var datafile = new Date(
@@ -187,8 +75,7 @@ function Openfile(
 
                   var body = document.getElementById("root");
                   body.classList.add("process-file");
-                  document.getElementById("datafile").innerHTML =
-                    "Время записи файла: " + datafile;
+                  document.getElementById("datafile").innerHTML = datafile;
                   date = false;
                 }
                 // ! ------------------------------------------------------------------------
@@ -208,6 +95,7 @@ function Openfile(
                 /* 
                 if (line.match(/EPOCH OF CURRENT MAP/)){
               
+
               if(counthours===2){
                     if(line.match(/1     0/)){
            
@@ -217,10 +105,14 @@ function Openfile(
                       house = 2;
                     }                    
                   }   
+
+
             //      hourscount = counthours + house; // !ЭТО МОЖЕТ ЗАРЕШАТЬ
          
                   counthours++;            
+
                 }
+
         */
 
                 if (line.match(/180.0   5.0 450.0/) && ostanovka) {
@@ -255,7 +147,7 @@ function Openfile(
 
                               this.coordinates = [
                                 parseInt(dolgota),
-                                parseFloat(shirota),
+                                parseFloat(shirota)
                               ];
 
                               this.score = element * 18000;
@@ -278,7 +170,7 @@ function Openfile(
 
                                   this.coordinates = [
                                     parseInt(dolgota),
-                                    parseFloat(shirota),
+                                    parseFloat(shirota)
                                   ];
 
                                   this.score = element * 18000;
@@ -319,6 +211,7 @@ function Openfile(
               let sum = masselements.reduce((a, b) => a + b, 0);
               let result = sum / masselements.length;
               console.log(datafile);
+
               console.log(result);
               */
             } catch (e) {
@@ -329,7 +222,7 @@ function Openfile(
                   defaultId: 2,
                   title: "Ошибка",
                   message: "Массив не сохранился, размер больше 5мб",
-                  detail: "Позовите Алтуна",
+                  detail: "Позовите Алтуна"
                 });
               }
             }
@@ -342,7 +235,7 @@ function Openfile(
             defaultId: 2,
             title: "Ошибка",
             message: "Файл неверного расширения! ",
-            detail: "Выберите файл ionex с расширением .18i",
+            detail: "Выберите файл ionex с расширением .18i"
           });
         }
       } else {
@@ -352,17 +245,17 @@ function Openfile(
           defaultId: 2,
           title: "Ошибка",
           message: "Вы не выбрали файл",
-          detail: "Выберите файл с расширением ionex!",
+          detail: "Выберите файл с расширением ionex!"
         });
       }
     })
-    .catch((err) => {
+    .catch(err => {
       dialog.showMessageBox({
         type: "error",
         buttons: ["Окей"],
         defaultId: 2,
         title: "Что то не так",
-        message: "Ошибка: " + err,
+        message: "Ошибка: " + err
       });
     });
 }

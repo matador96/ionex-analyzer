@@ -14,10 +14,11 @@ require("update-electron-app")({
 
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 900,
-    height: 680,
+    width: 950,
+    height: 830,
    autoHideMenuBar: true,
-
+   resizable: false,
+  
     webPreferences: { nodeIntegration: true, webSecurity: false }
   });
   mainWindow.loadURL(

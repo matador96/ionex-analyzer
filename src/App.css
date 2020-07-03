@@ -43,18 +43,11 @@ background-size:cover;
 
 #root{
 	background-image:  url("fon_world.jpg");
-	animation: animatedBackground 6360s linear infinite;
-	-webkit-animation: animatedBackground 6360s linear infinite;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
-@keyframes animatedBackground {
-  0 {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: -50800px 0px; /* анимируем свойство background-position */
-  }
-}
+
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
