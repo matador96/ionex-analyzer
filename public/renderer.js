@@ -1,7 +1,6 @@
 const { dialog } = window.require("electron").remote;
 const fs = require("fs");
 
-
 function MinimalPes() {
   var jsn = JSON.parse(localStorage.getItem("massive"));
   let massiveminimalpesfiltred = [];
@@ -78,7 +77,7 @@ function SaveFile(dolgotamax, dolgotamin, shirotamax, shirotamin, pesmin) {
           "\t" +
           arr.coordinates[0] +
           "\t" +
-          arr.coordinates[1] +
+          arr.coordinates[1].toString().replace(".", ",") +
           "\t" +
           pesik +
           "\n";
