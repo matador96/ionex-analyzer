@@ -52,7 +52,6 @@ class App extends Component {
     this.handleChangeMarkerAdd = this.handleChangeMarkerAdd.bind(this);
 
     this.handleChangeanimation = this.handleChangeanimation.bind(this);
-   
   }
 
   OnclickButtonSave(e) {
@@ -124,6 +123,7 @@ class App extends Component {
       minimalpes: !this.state.minimalpes,
     });
   }
+
   handleChangeanimation() {
     this.setState(
       {
@@ -224,8 +224,6 @@ class App extends Component {
     return time;
   }
 
-
-
   render() {
     /*
     if (JSON.parse(localStorage.getItem("massive"))) {
@@ -241,10 +239,10 @@ class App extends Component {
           ) : (
             <>
               <div className="App-header">
-                <h2 class="h2-main">IONEX Viewer</h2>
+                <h2 className="h2-main">IONEX Viewer</h2>
               </div>
 
-              <p className="App-intro">
+              <div className="App-intro">
                 {/* 
                 <Form.Control
                   as="select"
@@ -348,11 +346,11 @@ class App extends Component {
                     top: 5,
                     fontSize: 13,
                   }}
-                ></div>
+                />
                 {/*  <Mas />
 
               */}
-              </p>
+              </div>
 
               {/*<Help /> */}
 
@@ -411,35 +409,38 @@ class App extends Component {
                       {/*  <div style={{ color: "#fff" }}>Добавить маркер</div>*/}
 
                       <FormGroup className="flex-bruh" style={{ margin: 0 }}>
-                        <h2 class="h2-new">Добавить маркер</h2>
-                        <label class="switch">
+                        <h2 className="h2-new">Добавить маркер</h2>
+                        <label className="switch">
                           <input
                             type="checkbox"
                             onClick={this.handleChangeMarkerAdd}
+                            checked={this.state.marker}
                           />
-                          <span class="slider round"></span>
+                          <span className="slider round"></span>
                         </label>
                       </FormGroup>
 
                       <FormGroup className="flex-bruh" style={{ margin: 0 }}>
-                        <h2 class="h2-new">Убрать низкие TEC</h2>
-                        <label class="switch">
+                        <h2 className="h2-new">Убрать низкие TEC</h2>
+                        <label className="switch">
                           <input
                             type="checkbox"
                             onClick={this.handleChangeMinimalPes}
+                            checked={this.state.minimalpes}
                           />
-                          <span class="slider round"></span>
+                          <span className="slider round"></span>
                         </label>
                       </FormGroup>
 
                       <FormGroup className="flex-bruh" style={{ margin: 0 }}>
-                        <h2 class="h2-new">Включить анимацию</h2>
-                        <label class="switch">
+                        <h2 className="h2-new">Включить анимацию</h2>
+                        <label className="switch">
                           <input
                             type="checkbox"
                             onClick={this.handleChangeanimation}
+                            checked={this.state.animation}
                           />
-                          <span class="slider round"></span>
+                          <span className="slider round"></span>
                         </label>
                       </FormGroup>
                     </FormGroup>
@@ -710,9 +711,12 @@ class App extends Component {
                   </Row>
                 </Col>
 
-                <div style={{color:'#fff', position: 'fixed', bottom: '10px'}}>
-                  Исходный код программы на GitHub: https://github.com/matador96/ionex-analyzer  &nbsp;    &nbsp;               
-                  <br/>
+                <div
+                  style={{ color: "#fff", position: "fixed", bottom: "10px" }}
+                >
+                  Исходный код программы на GitHub:
+                  https://github.com/matador96/ionex-analyzer &nbsp; &nbsp;
+                  <br />
                   Разработчик: atubrah@mail.ru
                 </div>
               </TabPanel>

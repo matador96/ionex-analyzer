@@ -40,6 +40,13 @@ background-size:cover;
 }
 
 
+.react-tabs__tab--selected {
+
+  color: #000 !important;
+
+}
+
+
 
 #root{
 	background-image:  url("fon_world.jpg");

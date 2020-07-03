@@ -7,6 +7,7 @@ import {
   Marker,
 } from "react-simple-maps";
 import { scaleLinear } from "d3-scale";
+import geoUrl from "./world-110m.json"
 
 const wrapperStyles = {
   width: "97vw",
@@ -17,9 +18,8 @@ const cityScale = scaleLinear()
   .domain([0, 37843000])
   .range([1, 25]);
 
-const geoUrl =
-  "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
-
+//const geoUrl = "/world-110m.json";
+//const geoUrl ="https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 export default class BasicMap extends Component {
   ShowCoordinates(name, coordinates, score, e) {
     var textstart;
