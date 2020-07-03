@@ -9,24 +9,25 @@ let mainWindow;
 
 require("update-electron-app")({
   repo: "kitze/react-electron-example",
-  updateInterval: "1 hour"
+  updateInterval: "1 hour",
 });
 
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 950,
     height: 830,
-   autoHideMenuBar: true,
-   resizable: false,
-  
-    webPreferences: { nodeIntegration: true, webSecurity: false }
+    autoHideMenuBar: true,
+    resizable: false,
+    icon: __dirname + "/favicon_old.ico",
+
+    webPreferences: { nodeIntegration: true, webSecurity: false },
   });
   mainWindow.loadURL(
     isDev
       ? "http://localhost:3000"
       : `file://${path.join(__dirname, "../build/index.html")}`
   );
- // mainWindow.setMenu(null); // Скрыть меню
+  // mainWindow.setMenu(null); // Скрыть меню
   mainWindow.on("closed", () => (mainWindow = null));
 }
 
