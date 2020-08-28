@@ -10,7 +10,7 @@ function MinimalPes() {
     jsn[i].forEach((arr) => {
       var pesik = Math.round(parseInt(arr.score) / 18000);
 
-      if (90 <= parseInt(pesik)) {
+      if (120 <= parseInt(pesik)) {
         daunmassive.push(arr);
       } else {
         return;
