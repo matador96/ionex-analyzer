@@ -16,7 +16,7 @@ Electron + React.js
 
 Для создания билда, 32 бит. 
 
-# Программа «IONEX VIEWER» для работы с IONEX файлами
+# Программа для работы с IONEX файлами
 
 ![Иллюстрация к проекту](https://github.com/matador96/ionex-analyzer/blob/master/ReadMeFiles/1.png?raw=true)
 ![Иллюстрация к проекту](https://github.com/matador96/ionex-analyzer/blob/master/ReadMeFiles/2.png?raw=true)
