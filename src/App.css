@@ -7,7 +7,7 @@
 
   width: 400px;
   margin: auto;
-    padding-top: 18%;
+  padding-top: 18%;
 
   transition-timing-function: easy;
   transition-duration: 2s;
@@ -18,43 +18,25 @@
 }
 
 #root {
- 
-  background-color:#000011;
-  /* 
-   background-color: rgb(34, 193, 195);
-   background: linear-gradient(
-    0deg,
-    rgba(34, 193, 195, 1) 0%,
-    rgba(45, 185, 253, 1) 100%
-  );*/
-  /*  background: url("https://htmlcolorcodes.com/assets/images/html-color-codes-color-tutorials-hero-00e10b1f.jpg"); */
-  /*background: url("fon.jpg");*/
+  background-color: #000011;
 
   background-size: cover;
   background-position: left top;
   height: 100vh;
-  width:100%;
+  width: 100%;
 
-background-size:cover;
-
+  background-size: cover;
 }
-
 
 .react-tabs__tab--selected {
-
   color: #000 !important;
-
 }
 
-
-
-#root{
-	background-image:  url("fon_world.jpg");
+#root {
+  background-image: url("fon_world.jpg");
   background-size: cover;
   background-repeat: no-repeat;
 }
-
-
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
@@ -97,17 +79,17 @@ background-size:cover;
   right: 0;
   bottom: 0;
   background-color: #fff;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
-.flex-bruh{
-  display:flex;
+.flex-bruh {
+  display: flex;
   align-items: center;
   width: 100%;
   min-width: 300px;
   justify-content: space-between;
 }
-.flex-bruh-middle{
+.flex-bruh-middle {
   align-items: center;
   text-align: left;
 }
@@ -119,17 +101,16 @@ background-size:cover;
   left: 4px;
   bottom: 4px;
   background-color: black;
-  -webkit-transition: .4s;
-  transition: .4s;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
 }
 
 input:checked + .slider {
-
   background-color: #ffc107;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1px #2196f3;
 }
 
 input:checked + .slider:before {
@@ -146,24 +127,23 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
-body{color:#fff;
+body {
+  color: #fff;
 }
 
 .react-tabs__tab {
-
   color: #fff;
   font-weight: 700;
 }
 
 .table,
 #datafile,
-.table td, .table th {
+.table td,
+.table th {
   color: #ffffff;
 }
 
-
-
-#mapbasic{
+#mapbasic {
   position: absolute;
   left: 15px;
   top: 15px;
@@ -176,8 +156,7 @@ body{color:#fff;
   -o-transition: 0.3s all;
 }
 
-
-.process-file #mapbasic{
+.process-file #mapbasic {
   opacity: 1;
   width: 95%;
 }
@@ -191,13 +170,13 @@ body{color:#fff;
   -o-transition: 0.3s all;
 }
 
-.timeclass{
+.timeclass {
   font-size: 25px;
   font-weight: 700;
-  
-  color:#fff;
+
+  color: #fff;
 }
-.my-button{
+.my-button {
   display: flex;
   justify-content: space-between;
 }
@@ -205,7 +184,6 @@ body{color:#fff;
 .process-file #menu-electron {
   opacity: 1;
 }
-
 
 .App {
   margin-top: 0vh !important;
@@ -233,15 +211,13 @@ body{color:#fff;
   opacity: 0;
 }
 
-.h2-main{
+.h2-main {
   color: #fff;
   text-transform: uppercase;
 }
-.h2-new{
-
-
+.h2-new {
   font-size: 18px;
-  color:#fff;
+  color: #fff;
 }
 /* UL LI */
 #menu-electron {
@@ -280,6 +256,12 @@ body{color:#fff;
 .list-counter-square > li:last-child {
   margin-bottom: 0;
 }
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
 .list-counter-square > li::before {
   content: counter(list);
   counter-increment: list;

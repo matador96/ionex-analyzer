@@ -27,7 +27,6 @@ function MinimalPes() {
 }
 function SaveFile(dolgotamax, dolgotamin, shirotamax, shirotamin, pesmin) {
   var jsn = JSON.parse(localStorage.getItem("massive"));
-  //  let massivefiltred = [];
 
   var data = "";
   data =
@@ -70,7 +69,6 @@ function SaveFile(dolgotamax, dolgotamin, shirotamax, shirotamin, pesmin) {
         parseFloat(shirotamax) >= parseFloat(arr.coordinates[1]) &&
         parseInt(pesmin) <= parseInt(pesik)
       ) {
-        // arr.coordinates[0] долгота
         data =
           data +
           time +
@@ -81,15 +79,11 @@ function SaveFile(dolgotamax, dolgotamin, shirotamax, shirotamin, pesmin) {
           "\t" +
           pesik +
           "\n";
-
-        //   massivefiltred.push(arr);
       } else {
         return;
       }
     });
   }
-
-  // localStorage.setItem("massivefiltred", JSON.stringify(massivefiltred));
 
   const savePath = dialog.showSaveDialogSync({
     filters: [
@@ -105,15 +99,6 @@ function SaveFile(dolgotamax, dolgotamin, shirotamax, shirotamin, pesmin) {
     var file = "Файл сохранен.";
     document.getElementById("filesozdan").innerHTML = file;
   });
-
-  /* OLD DELETE
-  fs.appendFile(filename + ".xls", data, (err) => {
-    if (err) throw err;
-    console.log("Файл создан");
-
-    var file = "Файл с названием " + filename + ".xls" + " создан.";
-    document.getElementById("filesozdan").innerHTML = file;
-  });*/
 }
 
 function Openfile(
@@ -128,9 +113,6 @@ function Openfile(
   dialog
     .showOpenDialog({ properties: ["openFile"] })
     .then((result) => {
-      //  console.log(result.canceled)
-      //  console.log(result.filePaths)
-
       // Открытие файла
 
       if (result.filePaths[0] !== undefined) {
@@ -204,23 +186,6 @@ function Openfile(
                     //* Это необходимо использовать ибо в Javascript нельзя выйти из foreach (every, some не хочу использовать как и try catch)
                   }
                 }
-                /* 
-                if (line.match(/EPOCH OF CURRENT MAP/)){
-              
-              if(counthours===2){
-                    if(line.match(/1     0/)){
-           
-                      house = 1;
-                    }else{
-            
-                      house = 2;
-                    }                    
-                  }   
-            //      hourscount = counthours + house; // !ЭТО МОЖЕТ ЗАРЕШАТЬ
-         
-                  counthours++;            
-                }
-        */
 
                 if (line.match(/180.0   5.0 450.0/) && ostanovka) {
                   //counter+5
@@ -297,7 +262,7 @@ function Openfile(
                       parseFloat(shirota)
                     ); //* Добавляем в объект значение координаты [долгота. широта] в строгой типизации
                     elem_arr.score = element; //* Добавляем в объект значение TEC
-*/
+                    */
 
                       //massivehour.push(elem_obj); //* Добавляем полученный объект в общий массив
                       dolgota = dolgota + 5; //* Прибавляем деление в 5 градусов
@@ -313,13 +278,6 @@ function Openfile(
             try {
               localStorage.setItem("massive", JSON.stringify(massive));
               localStorage.setItem("length", massive.length);
-
-              /*
-              let sum = masselements.reduce((a, b) => a + b, 0);
-              let result = sum / masselements.length;
-              console.log(datafile);
-              console.log(result);
-              */
             } catch (e) {
               if (e == QUOTA_EXCEEDED_ERR) {
                 dialog.showMessageBox({
@@ -332,7 +290,6 @@ function Openfile(
                 });
               }
             }
-            //    console.log(JSON.parse(localStorage.getItem("massive")));
           });
         } else {
           dialog.showMessageBox({
