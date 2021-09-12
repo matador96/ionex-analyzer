@@ -2,6 +2,8 @@
 Electron + React.js
 Дипломная работа
 
+(not of my best code, need refactoring)
+
 ## Команды для запуска среды разработки
 
 ### `npm start` or `npm run-script start`
